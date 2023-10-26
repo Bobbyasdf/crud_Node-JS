@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const morgan = require('morgan'); 
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -24,6 +25,10 @@ app.use(
     resave: false,
     })
 );
+
+app.use(
+    morgan("combined")
+)
 
 app.use((req, res, next) => {
     res.locals.message = req.session.message;
