@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const morgan = require('morgan'); 
+const path = require('path'); 
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -37,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static('uploads'));
-
+app.set('views', path.join(__dirname, 'views'))
 // set template engine
 app.set("view engine", "ejs");
 
