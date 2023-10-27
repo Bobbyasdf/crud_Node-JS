@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const morgan = require('morgan'); 
 const path = require('path'); 
+const partials = require('express-partials')
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -27,9 +28,7 @@ app.use(
     })
 );
 
-app.use(
-    morgan("combined")
-)
+app.use(morgan("combined"))
 
 app.use((req, res, next) => {
     res.locals.message = req.session.message;
@@ -38,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static('uploads'));
+app.use(partials())
 app.set('views', path.join(__dirname, 'views'))
 // set template engine
 app.set("view engine", "ejs");
